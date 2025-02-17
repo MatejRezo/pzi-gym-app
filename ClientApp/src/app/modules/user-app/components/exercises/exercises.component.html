@@ -1,0 +1,15 @@
+<mat-card class="mat-elevation-z8 d-flex flex-column px-0 h-100">
+  <mat-card-content class="m-0 overflow-auto flex-grow-1 px-3">
+    <mat-card *ngFor="let exercise of exercises" class="mat-elevation-z8 my-2">
+      <mat-card-title>{{ exercise.name }}</mat-card-title>
+      <mat-card-content> {{ exercise.description }} </mat-card-content>
+      <mat-card-actions class="d-flex justify-content-end pb-2 px-3" *ngIf="userRole === 'Owner'">
+        <button mat-button color="warn" (click)="onDeleteExercise(exercise.id)">DELETE</button>
+        <button mat-flat-button color="primary" (click)="onUpdateExercise(exercise)">EDIT</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-card-content>
+  <mat-card-actions class="d-flex justify-content-end pb-2 px-4" *ngIf="userRole === 'Owner'">
+    <button mat-flat-button color="primary" (click)="onAddExercise()">ADD</button>
+  </mat-card-actions>
+</mat-card>

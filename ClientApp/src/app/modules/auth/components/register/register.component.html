@@ -1,0 +1,30 @@
+<div class="register-container mt-5 d-flex flex-column align-items-center">
+  <mat-card-title>Register</mat-card-title>
+  <mat-card-content class="mt-4 w-75">
+    <form class="d-flex flex-column align-items-center" [formGroup]="registerForm">
+      <div class="d-flex align-items-center justify-content-between w-100">
+        <mat-form-field class="w-50 mt-3 px-1" appearance="fill">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" [(ngModel)]="firstName">
+        </mat-form-field>
+        <mat-form-field class="w-50 mt-3 px-1" appearance="fill">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" [(ngModel)]="lastName">
+        </mat-form-field>
+      </div>
+      <mat-form-field class="w-100 mt-3" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" [(ngModel)]="username">
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-3" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" [(ngModel)]="password">
+      </mat-form-field>
+      <mat-form-field class="w-100 mt-3" appearance="fill">
+        <mat-label>Repeat password</mat-label>
+        <input matInput formControlName="repeatPassword" type="password" [(ngModel)]="repeatPassword">
+      </mat-form-field>
+      <button mat-flat-button color="primary" type="button" class="w-100 mt-4" (click)="onRegister()" [mat-dialog-close]>Register</button>
+    </form>
+  </mat-card-content>
+</div>

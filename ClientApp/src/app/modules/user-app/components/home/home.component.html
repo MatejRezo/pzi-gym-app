@@ -1,0 +1,28 @@
+<div class="home-container row m-0 p-0 h-100">
+  <div class="col-12 col-md-5 h-100 d-flex flex-column">
+    <div class="app-view__title py-3 px-2"> User Information</div>
+    <app-user-info-card
+      class="flex-grow-1"
+      [personalDetails]="personalDetails"
+      (updatedUsers)="onUpdateUserDetails($event)"
+    ></app-user-info-card>
+  </div>
+  <div class="col-7 d-none d-md-block h-100 d-flex flex-column position-relative">
+    <div class="app-view__title py-3 px-2"> News </div>
+    <mat-card class="mat-elevation-z8 d-flex flex-column px-0" style="height: calc(100% - 70px)">
+      <mat-card-content class="m-0 overflow-auto flex-grow-1 px-3">
+        <mat-card *ngFor="let news of newsItems" class="mat-elevation-z8 my-2">
+          <mat-card-title>{{ news.title }}</mat-card-title>
+          <mat-card-content> {{ news.description }} </mat-card-content>
+          <mat-card-actions class="d-flex justify-content-end pb-2 px-3" *ngIf="userRole === 'Owner'">
+            <button mat-button color="warn" (click)="onDeleteNews(news.id)">DELETE</button>
+            <button mat-flat-button color="primary" (click)="onUpdateNews(news)">EDIT</button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-card-content>
+      <mat-card-actions class="d-flex justify-content-end pb-2 px-4" *ngIf="userRole === 'Owner'">
+        <button mat-flat-button color="primary" (click)="onAddNews()">ADD</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

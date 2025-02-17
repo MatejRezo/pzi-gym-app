@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{ data.isEdit ? 'Edit exercise' : 'Add exercise' }}</h1>
+<div mat-dialog-content>
+  <p>Enter Exercise title</p>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Exercise name</mat-label>
+    <input matInput [(ngModel)]="exerciseItem.name">
+  </mat-form-field>
+
+  <p>Enter Exercise description</p>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Exercise description</mat-label>
+    <textarea matInput [(ngModel)]="exerciseItem.description"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="exerciseItem" cdkFocusInitial color="primary">Ok</button>
+</div>

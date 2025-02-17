@@ -1,0 +1,35 @@
+* {
+  justify-content: space-between;
+}
+
+.item-border {
+  background-color: rgb(211 229 255);
+  border-radius: 10px;
+}
+
+.uline {
+  border-bottom: 2px solid rgb(45 49 255);
+}
+
+.profile-img {
+  width: 150px;
+  height: 250px;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.tehnology-img {
+  width: 80px;
+  height: 80px;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+a {
+  color: black;
+  font-size: 18px;
+  text-decoration: none;
+}

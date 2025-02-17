@@ -1,0 +1,45 @@
+<mat-card class="d-flex flex-column mat-elevation-z8 h-100">
+  <mat-card-content
+    class="m-0 flex-grow-1 d-flex flex-column align-items-center"
+    style="height: 100px !important"
+  >
+    <div class="d-flex flex-column align-items-center justify-content-center">
+      <div style="height: 150px; width: 150px; border-radius: 50%; background-color: aliceblue;">
+        <mat-icon style="font-size: 150px;" class="h-100 w-100">person</mat-icon>
+      </div>
+      <div class="text-center h1 mb-3">
+        {{ personalDetails?.firstName }} {{ personalDetails?.lastName }}
+      </div>
+    </div>
+    <div class="user-info-form w-100 px-5 flex-grow-1 overflow-auto">
+      <form class="d-flex flex-column align-items-start h-100" [formGroup]="userInfoFrom">
+        <p>Enter First Name:</p>
+        <mat-form-field class="w-100 mt-1" appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstname" required [(ngModel)]="newPersonalDetails.firstName">
+        </mat-form-field>
+        <p>Enter Last Name:</p>
+        <mat-form-field class="w-100 mt-1" appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastname" required [(ngModel)]="newPersonalDetails.lastName">
+        </mat-form-field>
+        <p>Role:</p>
+        <mat-form-field appearance="fill">
+          <mat-label>Role</mat-label>
+          <mat-select [(ngModel)]="newPersonalDetails.userRole" formControlName="selectedRole">
+            <mat-option *ngFor="let role of roles" [value]="role">
+              {{role.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="d-flex justify-content-end pb-2 px-3">
+    <button mat-button (click)="onDeleteUser()" color="warn">DELETE</button>
+    <button mat-button (click)="onCancleUpdate()"
+      [disabled]="checkIfDataChanged()">CANCEL</button>
+    <button mat-flat-button color="primary" (click)="onUserInfoUpdate(newPersonalDetails)"
+      [disabled]="checkIfDataChanged()">SAVE</button>
+  </mat-card-actions>
+</mat-card>

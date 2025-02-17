@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{ data.isEdit ? 'Edit news' : 'Add news' }}</h1>
+<div mat-dialog-content>
+  <p>Enter news title</p>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>News title</mat-label>
+    <input matInput [(ngModel)]="newsItem.title">
+  </mat-form-field>
+
+  <p>Enter news description</p>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>News description</mat-label>
+    <textarea matInput [(ngModel)]="newsItem.description"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="newsItem" cdkFocusInitial color="primary">Ok</button>
+</div>

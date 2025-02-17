@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Add training plan</h1>
+<div mat-dialog-content>
+  <p>Enter Training plan title</p>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Training plan title</mat-label>
+    <input matInput [(ngModel)]="trainingPlanItem.name" required>
+  </mat-form-field>
+
+  <p>Enter Training plan description</p>
+  <mat-form-field appearance="fill" class="w-100">
+    <mat-label>Training plan description</mat-label>
+    <textarea matInput [(ngModel)]="trainingPlanItem.description"></textarea>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="trainingPlanItem"
+    cdkFocusInitial color="primary"
+    [disabled]="!trainingPlanItem.name.trim().length"
+  >Ok</button>
+</div>

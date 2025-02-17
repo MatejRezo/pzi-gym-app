@@ -1,0 +1,21 @@
+<div class="h-100 d-flex flex-column">
+  <div class="titles d-flex">
+    <div
+      class="app-view__title py-3 px-2 cursor-pointer"
+      style="border-bottom: unset;"
+      routerLink="plans"
+      routerLinkActive="app-view__title-selected"
+      matRipple
+    > Training plans </div>
+    <div
+      class="app-view__title py-3 px-2 mx-4 cursor-pointer"
+      style="border-bottom: unset;"
+      routerLink="exercises"
+      routerLinkActive="app-view__title-selected"
+      matRipple
+    > Exercises </div>
+  </div>
+  <div class="flex-grow-1 h-100" style="min-height: 0 !important;">
+    <router-outlet></router-outlet>
+  </div>
+</div>

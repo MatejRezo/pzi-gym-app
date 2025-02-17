@@ -1,0 +1,31 @@
+# Use the ASP.NET Core runtime as the base image for the final stage.
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+# Set the environment as needed (Development, Production, etc.)
+ENV ASPNETCORE_ENVIRONMENT=Development
+
+# Build and publish stage: use the full SDK image.
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+
+# Copy the project file and restore dependencies.
+# (This leverages Docker layer caching so that if your csproj file hasn’t changed, the restore step is reused.)
+COPY ["SportiverseApi/SportiverseApi.csproj", "SportiverseApi/"]
+RUN dotnet restore "SportiverseApi/SportiverseApi.csproj"
+
+# Copy the remaining source code.
+COPY . .
+
+# Change into the project directory and publish the application.
+# The publish command compiles the project and produces optimized output.
+# /p:UseAppHost=false avoids generating the native apphost, sidestepping related file conflicts.
+WORKDIR "/src/SportiverseApi"
+RUN dotnet publish "SportiverseApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Final stage: copy the published output into the runtime image.
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "SportiverseApi.dll"]

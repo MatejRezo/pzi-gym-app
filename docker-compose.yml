@@ -1,0 +1,38 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql_db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: backend_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      # Override the connection string so that the back end connects to the "db" service.
+      - ConnectionStrings__DefaultConnection=Server=db;Database=sportiversedb;User=sa;Password=YourStrong!Passw0rd;
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: frontend_app
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  mssql-data:

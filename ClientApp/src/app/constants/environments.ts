@@ -1,6 +1,6 @@
 export enum ENVIRONMETS {
   local = 'http://localhost:8080/api',
-  production = 'https://sportiverse-dotnet-api.herokuapp.com/api'
+  production = 'https://pzi-gym.sumit.ba/api'
 };
 
-export const getCurrentEnv = () => ENVIRONMETS.local;
+export const getCurrentEnv = () => ENVIRONMETS.production;

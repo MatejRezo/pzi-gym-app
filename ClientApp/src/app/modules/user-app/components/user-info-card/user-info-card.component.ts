@@ -18,6 +18,8 @@ export class UserInfoCardComponent implements OnInit, OnChanges {
   userInfoFrom!: FormGroup;
   roles: any[] = [];
   userRole: string = '';
+  errorMessage = '';
+
 
   checkIfDataChanged = () => {
     if(!this.personalDetails) return false;
@@ -72,7 +74,20 @@ export class UserInfoCardComponent implements OnInit, OnChanges {
 
   onDeleteUser() {
     this.authService.deleteUser(this.personalDetails.id)
-      .subscribe(res => this.updatedUsers.emit(res));
+    .subscribe({
+      next: (res: any) => {
+        this.updatedUsers.emit(res);
+        // Clear any previous error message if delete was successful.
+        this.errorMessage = '';
+      },
+      error: (error: any) => {
+        if (error.status === 403) {
+          this.errorMessage = 'You do not have permission to delete this user.';
+        } else {
+          this.errorMessage = 'An unexpected error occurred. Please try again later.';
+        }
+      }
+    });
   }
 
 }

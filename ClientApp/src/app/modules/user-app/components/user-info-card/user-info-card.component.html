@@ -34,6 +34,9 @@
         </mat-form-field>
       </form>
     </div>
+    <div *ngIf="errorMessage" style="color: red; font-weight: bold;">
+      {{ errorMessage }}
+    </div>
   </mat-card-content>
   <mat-card-actions class="d-flex justify-content-end pb-2 px-3">
     <button mat-button (click)="onDeleteUser()" color="warn">DELETE</button>
